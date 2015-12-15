@@ -37,7 +37,7 @@ public class DAOCliente {
     }
 
     ArrayList<Cliente> buscarTodos() throws Exception{
-  ArrayList<Cliente>clientes=  (ArrayList<Cliente>) session.createCriteria(Cliente.class).list();
+  ArrayList<Cliente> clientes =  (ArrayList<Cliente>) session.createCriteria(Cliente.class).list();
   cerrarTodo();
   
     return clientes;
@@ -49,5 +49,23 @@ public class DAOCliente {
          
          return c;
     }
-    
+    public void borrar(Integer id) throws Exception{
+        Cliente c=new Cliente();
+        c.setIdCliente(id);
+    }
+      public Cliente buscarPorId (Integer id)throws Exception{
+        Cliente a=(Cliente) session.createCriteria(Cliente.class).add(Restrictions.idEq(id)).uniqueResult();
+        cerrarTodo();
+        return a;
+    }
+      Cliente actualiar (Cliente c)throws Exception{
+          session.update(c);
+          return c;
+      }
+      void borrar (Integer id) throws Exception{
+          Cliente c=new Cliente();
+          c.setIdCliente(id);
+          session.delete(c);
+      }
+      }
 }   
